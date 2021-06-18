@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="FraisCreateDlg" widgetVar="FraisCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateFraisTitle}">
+            <h:form id="FraisCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{fraisController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateFraisLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{fraisController.selected.nom}" title="#{bundle.CreateFraisTitle_nom}" required="true" requiredMessage="#{bundle.CreateFraisRequiredMessage_nom}"/>
+                        <p:outputLabel value="#{bundle.CreateFraisLabel_montant}" for="montant" />
+                        <p:inputText id="montant" value="#{fraisController.selected.montant}" title="#{bundle.CreateFraisTitle_montant}" required="true" requiredMessage="#{bundle.CreateFraisRequiredMessage_montant}"/>
+                        <p:outputLabel value="Kilometrage prévue" for="idPeriodekilo" />
+                        <p:selectOneMenu id="idPeriodekilo" value="#{fraisController.selected.idPeriodekilo}" >
+                            <f:selectItems value="#{periodeKilometrageTabController.itemsAvailableSelectOne}"
+                                           var="idPeriodekiloItem"
+                                           itemValue="#{idPeriodekiloItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Date prévue" for="idPeriodet" />
+                        <p:selectOneMenu id="idPeriodet" value="#{fraisController.selected.idPeriodet}" >
+                            <f:selectItems value="#{periodeTempsTabController.itemsAvailableSelectOne}"
+                                           var="idPeriodetItem"
+                                           itemValue="#{idPeriodetItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Type" for="idType" />
+                        <p:selectOneMenu id="idType" value="#{fraisController.selected.idType}" required="true" requiredMessage="#{bundle.EditFraisRequiredMessage_idType}">
+                            <f:selectItems value="#{typeFraisController.itemsAvailableSelectOne}"
+                                           var="idTypeItem"
+                                           itemValue="#{idTypeItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateFraisLabel_matricule}" for="matricule" />
+                        <p:selectOneMenu id="matricule" value="#{fraisController.selected.matricule}" required="true" requiredMessage="#{bundle.EditFraisRequiredMessage_matricule}">
+                            <f:selectItems value="#{voituresController.itemsAvailableSelectOne}"
+                                           var="matriculeItem"
+                                           itemValue="#{matriculeItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{fraisController.create}" value="#{bundle.Save}" update="display,:FraisListForm:datalist,:growl" oncomplete="handleSubmit(args,'FraisCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="FraisCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

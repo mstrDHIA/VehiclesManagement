@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TypeCarburantCreateDlg" widgetVar="TypeCarburantCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTypeCarburantTitle}">
+            <h:form id="TypeCarburantCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{typeCarburantController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateTypeCarburantLabel_typecarb}" for="typecarb" />
+                        <p:inputText id="typecarb" value="#{typeCarburantController.selected.typecarb}" title="#{bundle.CreateTypeCarburantTitle_typecarb}" required="true" requiredMessage="#{bundle.CreateTypeCarburantRequiredMessage_typecarb}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{typeCarburantController.create}" value="#{bundle.Save}" update="display,:TypeCarburantListForm:datalist,:growl" oncomplete="handleSubmit(args,'TypeCarburantCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TypeCarburantCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

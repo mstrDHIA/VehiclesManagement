@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+ <head>
+         <h:outputStylesheet library="css" name="jsfcrud.css"/>
+      <h:outputStylesheet library="css" name="bootstrap.css"/>
+         <h:outputScript library="js" name="bootstrap.min.js"/>
+    </head>
+  <ui:composition template="/admin/template.xhtml" >
+
+
+        <ui:define name="title">
+            <h:outputText value="Periode Kilometrage"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="PeriodeKilometrageTabListForm">
+                <p:panel class="test" header="Periode Kilometrage">
+                    <p:dataTable  id="datalist" value="#{periodeKilometrageTabController.items}" var="item"
+                                 selectionMode="single" selection="#{periodeKilometrageTabController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idPeriodekilo}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column filterBy="#{item.idPeriodekilo}" sortBy="#{item.idPeriodekilo}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPeriodeKilometrageTabTitle_idPeriodekilo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idPeriodekilo}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.kilotrigger}" sortBy="#{item.kilotrigger}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPeriodeKilometrageTabTitle_kilotrigger}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.kilotrigger}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.kilodebut}" sortBy="#{item.kilodebut}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPeriodeKilometrageTabTitle_kilodebut}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.kilodebut}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.tolerance}" sortBy="#{item.tolerance}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPeriodeKilometrageTabTitle_tolerance}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tolerance}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.alarme}" sortBy="#{item.alarme}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPeriodeKilometrageTabTitle_alarme}"/>
+                            </f:facet>
+                            <h:outputText value="#{periodeKilometrageTabController.changealarmek(item.idPeriodekilo)}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{periodeKilometrageTabController.prepareCreate}" update=":PeriodeKilometrageTabCreateForm" oncomplete="PF('PeriodeKilometrageTabCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":PeriodeKilometrageTabViewForm" oncomplete="PF('PeriodeKilometrageTabViewDialog').show()" disabled="#{empty periodeKilometrageTabController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":PeriodeKilometrageTabEditForm" oncomplete="PF('PeriodeKilometrageTabEditDialog').show()" disabled="#{empty periodeKilometrageTabController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{periodeKilometrageTabController.destroy}" update=":growl,datalist" disabled="#{empty periodeKilometrageTabController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

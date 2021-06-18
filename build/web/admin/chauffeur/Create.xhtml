@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+     <head>
+      <h:outputStylesheet library="css" name="bootstrap.css"/>
+         <h:outputScript library="js" name="bootstrap.min.js"/>
+    </head>
+
+    <ui:composition>
+
+        <p:dialog id="ChauffeurCreateDlg" widgetVar="ChauffeurCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateChauffeurTitle}">
+            <h:form id="ChauffeurCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{chauffeurController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateChauffeurLabel_cin}" for="cin" />
+                        
+                            <p:inputText id="cin"   value="#{chauffeurController.selected.cin}" title="#{bundle.CreateChauffeurTitle_cin}" required="true" requiredMessage="#{bundle.CreateChauffeurRequiredMessage_cin}"/>
+                        <p:outputLabel value="#{bundle.CreateChauffeurLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{chauffeurController.selected.nom}" title="#{bundle.CreateChauffeurTitle_nom}" required="true" requiredMessage="#{bundle.CreateChauffeurRequiredMessage_nom}"/>
+                        <p:outputLabel value="#{bundle.CreateChauffeurLabel_prenom}" for="prenom" />
+                        <p:inputText id="prenom" value="#{chauffeurController.selected.prenom}" title="#{bundle.CreateChauffeurTitle_prenom}" required="true" requiredMessage="#{bundle.CreateChauffeurRequiredMessage_prenom}"/>
+                        <p:outputLabel value="#{bundle.CreateChauffeurLabel_age}" for="age" />
+                        <p:inputText id="age" value="#{chauffeurController.selected.age}" title="#{bundle.CreateChauffeurTitle_age}" required="true" requiredMessage="#{bundle.CreateChauffeurRequiredMessage_age}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{chauffeurController.create}" value="#{bundle.Save}" update="display,:ChauffeurListForm:datalist,:growl" oncomplete="handleSubmit(args,'ChauffeurCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ChauffeurCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

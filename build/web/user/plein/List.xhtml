@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+  <head>
+         <h:outputStylesheet library="css" name="jsfcrud.css"/>
+      <h:outputStylesheet library="css" name="bootstrap.css"/>
+         <h:outputScript library="js" name="bootstrap.min.js"/>
+    </head>   
+    <h:head>
+         <h:outputStylesheet library="css" name="jsfcrud.css"/>
+    </h:head>
+
+  <ui:composition template="/user/template.xhtml" >
+
+
+        <ui:define name="title">
+            <h:outputText value="Plein"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="PleinListForm">
+                <p:panel  class="title test" header="Plein">
+                    <p:dataTable id="datalist" value="#{pleinController.items}" var="item"
+                                 selectionMode="single" selection="#{pleinController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idPlein}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column filterBy="#{item.idPlein}"  sortBy="#{item.idPlein}">
+                            <f:facet name="header" >
+                                <h:outputText  value="#{bundle.ListPleinTitle_idPlein}"  />
+                            </f:facet>
+                            <h:outputText value="#{item.idPlein}"/>
+                        </p:column >
+                        <p:column filterBy="#{item.dateplein}" sortBy="#{item.dateplein}">
+                            <f:facet name="header">
+                                <h:outputText value="Date Plein" />
+                            </f:facet>
+                            <h:outputText value="#{item.dateplein}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column filterBy="#{item.kiloActuel}" sortBy="#{item.kiloActuel}">
+                            <f:facet name="header">
+                                <h:outputText value="Kilometrage Actuel"/>
+                            </f:facet>
+                            <h:outputText value="#{item.kiloActuel}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.litres}" sortBy="#{item.litres}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPleinTitle_litres}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.litres}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.prixlitre}" sortBy="#{item.prixlitre}">
+                            <f:facet name="header">
+                                <h:outputText value="Prix Du Litre"/>
+                            </f:facet>
+                            <h:outputText value="#{item.prixlitre}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.prixplein}" sortBy="#{item.prixplein}">
+                            <f:facet name="header">
+                                <h:outputText value="Prix Plein"/>
+                            </f:facet>
+                            <h:outputText value="#{item.prixplein}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.consommation}" sortBy="#{item.consommation}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPleinTitle_consommation}"/>
+                            </f:facet>
+                            <h:outputText value="#{pleinController.formatfloat(item.consommation)}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.distance}" sortBy="#{item.distance}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPleinTitle_distance}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.distance}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.distancederniere}" sortBy="#{item.distancederniere}">
+                            <f:facet name="header">
+                                <h:outputText value="Distance Derniere "/>
+                            </f:facet>
+                            <h:outputText value="#{item.distancederniere}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.coutkilo}" sortBy="#{item.coutkilo}">
+                            <f:facet name="header">
+                                <h:outputText value="Cout kilo"/>
+                            </f:facet>
+                            <h:outputText value="#{pleinController.formatfloat(item.coutkilo)}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.resdernier}" sortBy="#{item.resdernier}">
+                            <f:facet name="header">
+                                <h:outputText value="Volume Du Dernier Reservoir"/>
+                            </f:facet>
+                            <h:outputText value="#{item.resdernier}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.resactuel}" sortBy="#{item.resactuel}">
+                            <f:facet name="header">
+                                <h:outputText value="Volume Actuel De Reservoir"/>
+                            </f:facet>
+                            <h:outputText value="#{item.resactuel}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.matricule}" sortBy="#{item.matricule}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPleinTitle_matricule}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.matricule}"/>
+                        </p:column>
+                        
+                        <f:facet name="footer">
+                             
+                            <p:commandButton  icon="ui-icon-plus"    actionListener="#{pleinController.test(555)}" update=":PleinCreateForm" />
+
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{pleinController.prepareCreate}" update=":PleinCreateForm" oncomplete="PF('PleinCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":PleinViewForm" oncomplete="PF('PleinViewDialog').show()" disabled="#{empty pleinController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":PleinEditForm" oncomplete="PF('PleinEditDialog').show()" disabled="#{empty pleinController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{pleinController.destroy}" update=":growl,datalist" disabled="#{empty pleinController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+        
+    </ui:composition>
+
+</html>

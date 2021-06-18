@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ContratEditDlg" widgetVar="ContratEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditContratTitle}">
+            <h:form id="ContratEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{contratController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditContratLabel_idContrat}" for="idContrat" />
+                        <p:inputText id="idContrat" value="#{contratController.selected.idContrat}" title="#{bundle.EditContratTitle_idContrat}" required="true" requiredMessage="#{bundle.EditContratRequiredMessage_idContrat}"/>
+                        <p:outputLabel value="#{bundle.EditContratLabel_date}" for="date" />
+                        <p:calendar id="date" pattern="dd/MM/yyyy" value="#{contratController.selected.date}" title="#{bundle.EditContratTitle_date}" required="true" requiredMessage="#{bundle.EditContratRequiredMessage_date}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditContratLabel_periode}" for="periode" />
+                        <p:inputText id="periode" value="#{contratController.selected.periode}" title="#{bundle.EditContratTitle_periode}" required="true" requiredMessage="#{bundle.EditContratRequiredMessage_periode}"/>
+                        <p:outputLabel value="#{bundle.EditContratLabel_entreprise}" for="entreprise" />
+                        <p:inputText id="entreprise" value="#{contratController.selected.entreprise}" title="#{bundle.EditContratTitle_entreprise}" required="true" requiredMessage="#{bundle.EditContratRequiredMessage_entreprise}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{contratController.update}" value="#{bundle.Save}" update="display,:ContratListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ContratEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ContratEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

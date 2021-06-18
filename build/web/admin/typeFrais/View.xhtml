@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TypeFraisViewDlg" widgetVar="TypeFraisViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTypeFraisTitle}">
+            <h:form id="TypeFraisViewForm">
+                <p:commandButton value="Print" type="button" icon="pi pi-print" style="display:block;margin-bottom: 20px">
+    <p:printer target="printable" />
+</p:commandButton>
+                <h:panelGroup id="display">
+                    <p:panelGrid id="printable" columns="2" rendered="#{typeFraisController.selected != null}">
+                        <h:outputText value="#{bundle.ViewTypeFraisLabel_idType}"/>
+                        <h:outputText value="#{typeFraisController.selected.idType}" title="#{bundle.ViewTypeFraisTitle_idType}"/>
+                        <h:outputText value="#{bundle.ViewTypeFraisLabel_type}"/>
+                        <h:outputText value="#{typeFraisController.selected.type}" title="#{bundle.ViewTypeFraisTitle_type}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="TypeFraisViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

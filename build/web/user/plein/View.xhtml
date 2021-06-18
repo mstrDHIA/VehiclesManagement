@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+       
+        <h:outputStylesheet library="css" name="jsfcrud.css"/>
+       
+        <h:outputScript library="js" name="jsfcrud.js"/>
+        <h:outputStylesheet library="css" name="bootstrap.css"/>
+        <h:outputScript library="js" name="bootstrap.min.js"/>
+    </h:head>
+               
+
+    
+    
+    <ui:composition>
+
+        <p:dialog id="PleinViewDlg" widgetVar="PleinViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPleinTitle}">
+            <h:form id="PleinViewForm">
+                <p:commandButton value="Print" type="button" icon="pi pi-print" style="display:block;margin-bottom: 20px">
+    <p:printer target="printable" />
+</p:commandButton>
+                <h:panelGroup id="display">
+                    <p:panelGrid id="printable"  columns="2" rendered="#{pleinController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPleinLabel_idPlein}"/>
+                        <h:outputText value="#{pleinController.selected.idPlein}" title="#{bundle.ViewPleinTitle_idPlein}"/>
+                        <h:outputText value="Date Plein"/>
+                        <h:outputText value="#{pleinController.selected.dateplein}" title="#{bundle.ViewPleinTitle_dateplein}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="Kilometrage Actuel"/>
+                        <h:outputText value="#{pleinController.selected.kiloActuel}" title="#{bundle.ViewPleinTitle_kiloActuel}"/>
+                        <h:outputText value="#{bundle.ViewPleinLabel_litres}"/>
+                        <h:outputText value="#{pleinController.selected.litres}" title="#{bundle.ViewPleinTitle_litres}"/>
+                        <h:outputText value="Prix Du Litre"/>
+                        <h:outputText value="#{pleinController.selected.prixlitre}" title="#{bundle.ViewPleinTitle_prixlitre}"/>
+                        <h:outputText value="Prix Plein"/>
+                        <h:outputText value="#{pleinController.selected.prixplein}" title="#{bundle.ViewPleinTitle_prixplein}"/>
+                        <h:outputText value="#{bundle.ViewPleinLabel_consommation}"/>
+                        <h:outputText value="#{pleinController.formatfloat(pleinController.selected.consommation)}" title="#{bundle.ViewPleinTitle_consommation}"/>
+                        <h:outputText value="#{bundle.ViewPleinLabel_distance}"/>
+                        <h:outputText value="#{pleinController.selected.distance}" title="#{bundle.ViewPleinTitle_distance}"/>
+                        <h:outputText value="Distance Derniere"/>
+                        <h:outputText value="#{pleinController.selected.distancederniere}" title="#{bundle.ViewPleinTitle_distancederniere}"/>
+                        <h:outputText value="Cout Kilo"/>
+                        <h:outputText value="#{pleinController.formatfloat(pleinController.selected.coutkilo)}" title="#{bundle.ViewPleinTitle_coutkilo}"/>
+                        <h:outputText value="Derniere Volume Du Reservoir"/>
+                        <h:outputText value="#{pleinController.selected.resdernier}" title="#{bundle.ViewPleinTitle_resdernier}"/>
+                        <h:outputText value="Volume Actuelle Du Reservoire"/>
+                        <h:outputText value="#{pleinController.selected.resactuel}" title="#{bundle.ViewPleinTitle_resactuel}"/>
+                        <h:outputText value="#{bundle.ViewPleinLabel_matricule}"/>
+                        <h:outputText value="#{pleinController.selected.matricule}" title="#{bundle.ViewPleinTitle_matricule}"/>
+                    </p:panelGrid>
+                    <p:commandButton  id="hidebtn" value="#{bundle.Close}" onclick="PleinViewDialog.hide()"/>
+                   
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

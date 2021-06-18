@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DepencesCreateDlg" widgetVar="DepencesCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateDepencesTitle}">
+            <h:form id="DepencesCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{depencesController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateDepencesLabel_matricule}" for="matricule" />
+                        <p:selectOneMenu id="matricule" value="#{depencesController.selected.matricule}" required="true" requiredMessage="#{bundle.EditDepencesRequiredMessage_matricule}">
+                            <f:selectItems value="#{voituresController.itemsAvailableSelectOne}"
+                                           var="matriculeItem"
+                                           itemValue="#{matriculeItem}"/>
+                        </p:selectOneMenu>                       
+                        <p:outputLabel value="#{bundle.CreateDepencesLabel_total}" for="total" />
+                        <p:inputText id="total" value="#{depencesController.selected.total}" title="#{bundle.CreateDepencesTitle_total}" required="true" requiredMessage="#{bundle.CreateDepencesRequiredMessage_total}"/>
+                        <p:outputLabel value="Entreprise" for="idFournisseur" />
+                        <p:selectOneMenu id="idFournisseur" value="#{depencesController.selected.idFournisseur}" required="true" requiredMessage="#{bundle.EditDepencesRequiredMessage_idFournisseur}">
+                            <f:selectItems value="#{fournisseurController.itemsAvailableSelectOne}"
+                                           var="idFournisseurItem"
+                                           itemValue="#{idFournisseurItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{depencesController.create}" value="#{bundle.Save}" update="display,:DepencesListForm:datalist,:growl" oncomplete="handleSubmit(args,'DepencesCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DepencesCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

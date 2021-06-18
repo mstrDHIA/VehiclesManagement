@@ -1,0 +1,138 @@
+.ui-widget {
+    font-size: 12px !important;
+}
+.ui-layout-north {
+    z-index: 20 !important;
+    overflow: visible !important;;
+}
+.ui-layout-north .ui-layout-unit-content {
+    overflow: visible !important;
+}
+.ui-widget-header {
+    text-align: center;
+    text-transform: uppercase;
+}
+.ui-button {
+    margin-top: 10px !important;
+}
+.test{
+    text-align: center;
+}
+
+
+ul#list-nav {
+  margin:20px;
+  padding:0;
+  list-style:none;
+ 
+}
+
+
+ul#list-nav li {
+  display:inline
+}
+
+
+ul#list-nav li a {
+ text-decoration:none;
+ padding:5px 0;
+ width:90px;
+ background:#485e49;
+ color:#eee;
+ float:left;
+}
+
+
+#hidebtn {
+        display: none;
+    }
+    #printable{
+        font-size: 40px;
+    }
+    
+    
+    .title{
+        margin-left: -5px;
+        margin-right: -5px;
+        margin-top: -1px;
+    }
+
+    .userbtn{
+        z-index: 9999;
+        margin-left: -80px;
+        padding-left: 35px;
+        box-shadow: 2px 2px grey;
+        
+        width: 120px;
+        margin-right: 1450px;
+        
+           
+    }
+    .userbtn:hover{
+        
+       margin-left: -40px;
+       
+        
+    }
+    
+    
+    
+    
+    
+    ul li a{
+        font-size: 17px;
+        
+    }
+    
+    .item{
+        padding-left: 120px ;
+        padding-right: 120px;
+        margin-left: -20px;
+        margin-top: -22px;
+        margin-bottom: -20px;
+        padding-top: 22px;
+        
+    }
+    .item:hover{
+        background:linear-gradient(#99c2fb,#c6deff) ;
+    }
+    
+    
+    
+    @media print{
+        #printable{
+           margin-left: 300px;
+        }
+    }
+    
+    
+    .test{
+        margin-top: 7px;
+    }
+    
+    .image{
+        width: 120px;
+        margin-top: 17px;
+    }
+    
+    .circle{
+        background-color: white;
+        width: 160px;
+        height: 160px;
+        margin-top: 280px;
+        border-radius: 100000px;
+    }
+    
+    
+    .part:hover {
+        opacity: 0.8;
+    }
+    
+    .circle:hover{
+        margin-top: 270px;
+    }
+    
+    
+    
+    
+    

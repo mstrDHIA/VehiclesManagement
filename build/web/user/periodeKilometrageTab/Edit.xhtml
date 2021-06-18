@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PeriodeKilometrageTabEditDlg" widgetVar="PeriodeKilometrageTabEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPeriodeKilometrageTabTitle}">
+            <h:form id="PeriodeKilometrageTabEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{periodeKilometrageTabController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPeriodeKilometrageTabLabel_idPeriodekilo}" for="idPeriodekilo" />
+                        <p:inputText id="idPeriodekilo" value="#{periodeKilometrageTabController.selected.idPeriodekilo}" title="#{bundle.EditPeriodeKilometrageTabTitle_idPeriodekilo}" required="true" requiredMessage="#{bundle.EditPeriodeKilometrageTabRequiredMessage_idPeriodekilo}"/>
+                        <p:outputLabel value="#{bundle.EditPeriodeKilometrageTabLabel_kilotrigger}" for="kilotrigger" />
+                        <p:inputText id="kilotrigger" value="#{periodeKilometrageTabController.selected.kilotrigger}" title="#{bundle.EditPeriodeKilometrageTabTitle_kilotrigger}" required="true" requiredMessage="#{bundle.EditPeriodeKilometrageTabRequiredMessage_kilotrigger}"/>
+                        <p:outputLabel value="#{bundle.EditPeriodeKilometrageTabLabel_kilodebut}" for="kilodebut" />
+                        <p:inputText id="kilodebut" value="#{periodeKilometrageTabController.selected.kilodebut}" title="#{bundle.EditPeriodeKilometrageTabTitle_kilodebut}" required="true" requiredMessage="#{bundle.EditPeriodeKilometrageTabRequiredMessage_kilodebut}"/>
+                        <p:outputLabel value="#{bundle.EditPeriodeKilometrageTabLabel_tolerance}" for="tolerance" />
+                        <p:inputText id="tolerance" value="#{periodeKilometrageTabController.selected.tolerance}" title="#{bundle.EditPeriodeKilometrageTabTitle_tolerance}" required="true" requiredMessage="#{bundle.EditPeriodeKilometrageTabRequiredMessage_tolerance}"/>
+                        <p:outputLabel value="#{bundle.EditPeriodeKilometrageTabLabel_alarme}" for="alarme" />
+                        <p:inputText id="alarme" value="#{periodeKilometrageTabController.selected.alarme}" title="#{bundle.EditPeriodeKilometrageTabTitle_alarme}" required="true" requiredMessage="#{bundle.EditPeriodeKilometrageTabRequiredMessage_alarme}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{periodeKilometrageTabController.update}" value="#{bundle.Save}" update="display,:PeriodeKilometrageTabListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PeriodeKilometrageTabEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PeriodeKilometrageTabEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

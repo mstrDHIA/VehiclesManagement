@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PleinEditDlg" widgetVar="PleinEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPleinTitle}">
+            <h:form id="PleinEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{pleinController.selected != null}">
+                      
+                        <p:outputLabel value="Date Plein" for="dateplein" />
+                        <p:calendar id="dateplein" pattern="dd/MM/yyyy" value="#{pleinController.selected.dateplein}" title="#{bundle.EditPleinTitle_dateplein}" required="true" requiredMessage="#{bundle.EditPleinRequiredMessage_dateplein}" showOn="button"/>
+                        <p:outputLabel value="Kilometrage Actuel" for="kiloActuel" />
+                        <p:inputText id="kiloActuel" value="#{pleinController.selected.kiloActuel}" title="#{bundle.EditPleinTitle_kiloActuel}" required="true" requiredMessage="#{bundle.EditPleinRequiredMessage_kiloActuel}"/>
+                        <p:outputLabel value="#{bundle.EditPleinLabel_litres}" for="litres" />
+                        <p:inputText id="litres" value="#{pleinController.selected.litres}" title="#{bundle.EditPleinTitle_litres}" required="true" requiredMessage="#{bundle.EditPleinRequiredMessage_litres}"/>
+                        <p:outputLabel value="Prix Du Litre" for="prixlitre" />
+                        <p:inputText id="prixlitre" value="#{pleinController.selected.prixlitre}" title="#{bundle.EditPleinTitle_prixlitre}" required="true" requiredMessage="#{bundle.EditPleinRequiredMessage_prixlitre}"/>
+                       
+                        <p:outputLabel value="Volume Actuel" for="resactuel" />
+                        <p:inputText id="resactuel" value="#{pleinController.selected.resactuel}" title="#{bundle.EditPleinTitle_resactuel}" />
+                        <p:outputLabel value="#{bundle.EditPleinLabel_matricule}" for="matricule" />
+                        <p:selectOneMenu id="matricule" value="#{pleinController.selected.matricule}" required="true" requiredMessage="#{bundle.EditPleinRequiredMessage_matricule}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{voituresController.itemsAvailableSelectOne}"
+                                           var="matriculeItem"
+                                           itemValue="#{matriculeItem}"/>
+                        </p:selectOneMenu>
+                       
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{pleinController.update}" value="#{bundle.Save}" update="display,:PleinListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PleinEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PleinEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

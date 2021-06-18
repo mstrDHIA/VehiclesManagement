@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="FraisactifesEditDlg" widgetVar="FraisactifesEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditFraisactifesTitle}">
+            <h:form id="FraisactifesEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{fraisactifesController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditFraisactifesLabel_idActif}" for="idActif" />
+                        <p:inputText id="idActif" value="#{fraisactifesController.selected.idActif}" title="#{bundle.EditFraisactifesTitle_idActif}" required="true" requiredMessage="#{bundle.EditFraisactifesRequiredMessage_idActif}"/>
+                        <p:outputLabel value="#{bundle.EditFraisactifesLabel_validation}" for="validation" />
+                        <p:selectBooleanCheckbox id="validation" value="#{fraisactifesController.selected.validation}" required="true" requiredMessage="#{bundle.EditFraisactifesRequiredMessage_validation}"/>
+                        <p:outputLabel value="Date Validation" for="dateValidation" />
+                        <p:calendar id="dateValidation" pattern="dd/MM/yyyy" value="#{fraisactifesController.selected.dateValidation}" title="#{bundle.EditFraisactifesTitle_dateValidation}"  showOn="button"/>
+                        <p:outputLabel value="Date Actif" for="dateActif" />
+                        <p:calendar id="dateActif" pattern="dd/MM/yyyy" value="#{fraisactifesController.selected.dateActif}" title="#{bundle.EditFraisactifesTitle_dateActif}" required="true" requiredMessage="#{bundle.EditFraisactifesRequiredMessage_dateActif}" showOn="button"/>
+                        <p:outputLabel value="Periode Actife" for="periodeActif" />
+                        <p:inputText id="periodeActif" value="#{fraisactifesController.selected.periodeActif}" title="#{bundle.EditFraisactifesTitle_periodeActif}" />
+                        <p:outputLabel value="Frais" for="idFrais" />
+                        <p:selectOneMenu id="idFrais" value="#{fraisactifesController.selected.idFrais}" required="true" requiredMessage="#{bundle.EditFraisactifesRequiredMessage_idFrais}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{fraisController.itemsAvailableSelectOne}"
+                                           var="idFraisItem"
+                                           itemValue="#{idFraisItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{fraisactifesController.update}" value="#{bundle.Save}" update="display,:FraisactifesListForm:datalist,:growl" oncomplete="handleSubmit(args, 'FraisactifesEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="FraisactifesEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

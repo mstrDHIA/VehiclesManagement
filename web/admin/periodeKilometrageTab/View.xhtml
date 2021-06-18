@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PeriodeKilometrageTabViewDlg" widgetVar="PeriodeKilometrageTabViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPeriodeKilometrageTabTitle}">
+            <h:form id="PeriodeKilometrageTabViewForm">
+                <p:commandButton value="Print" type="button" icon="pi pi-print" style="display:block;margin-bottom: 20px">
+    <p:printer target="printable" />
+</p:commandButton>
+                <h:panelGroup id="display">
+                    <p:panelGrid id="printable" columns="2" rendered="#{periodeKilometrageTabController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPeriodeKilometrageTabLabel_idPeriodekilo}"/>
+                        <h:outputText value="#{periodeKilometrageTabController.selected.idPeriodekilo}" title="#{bundle.ViewPeriodeKilometrageTabTitle_idPeriodekilo}"/>
+                        <h:outputText value="#{bundle.ViewPeriodeKilometrageTabLabel_kilotrigger}"/>
+                        <h:outputText value="#{periodeKilometrageTabController.selected.kilotrigger}" title="#{bundle.ViewPeriodeKilometrageTabTitle_kilotrigger}"/>
+                        <h:outputText value="#{bundle.ViewPeriodeKilometrageTabLabel_kilodebut}"/>
+                        <h:outputText value="#{periodeKilometrageTabController.selected.kilodebut}" title="#{bundle.ViewPeriodeKilometrageTabTitle_kilodebut}"/>
+                        <h:outputText value="#{bundle.ViewPeriodeKilometrageTabLabel_tolerance}"/>
+                        <h:outputText value="#{periodeKilometrageTabController.selected.tolerance}" title="#{bundle.ViewPeriodeKilometrageTabTitle_tolerance}"/>
+                        <h:outputText value="#{bundle.ViewPeriodeKilometrageTabLabel_alarme}"/>
+                        <h:outputText value="#{periodeKilometrageTabController.selected.alarme}" title="#{bundle.ViewPeriodeKilometrageTabTitle_alarme}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PeriodeKilometrageTabViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

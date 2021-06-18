@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="FraisViewDlg" widgetVar="FraisViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewFraisTitle}">
+            <h:form id="FraisViewForm">
+                <p:commandButton value="Print" type="button" icon="pi pi-print" style="display:block;margin-bottom: 20px">
+    <p:printer target="printable" />
+</p:commandButton>
+                <h:panelGroup id="display">
+                    <p:panelGrid id="printable" columns="2" rendered="#{fraisController.selected != null}">
+                        <h:outputText value="#{bundle.ViewFraisLabel_idFrais}"/>
+                        <h:outputText value="#{fraisController.selected.idFrais}" title="#{bundle.ViewFraisTitle_idFrais}"/>
+                        <h:outputText value="#{bundle.ViewFraisLabel_nom}"/>
+                        <h:outputText value="#{fraisController.selected.nom}" title="#{bundle.ViewFraisTitle_nom}"/>
+                        <h:outputText value="#{bundle.ViewFraisLabel_montant}"/>
+                        <h:outputText value="#{fraisController.selected.montant}" title="#{bundle.ViewFraisTitle_montant}"/>
+                        <h:outputText value="Kilometrage prévue"/>
+                        <h:outputText value="#{fraisController.selected.idPeriodekilo.toString()}" title="#{bundle.ViewFraisTitle_idPeriodekilo}"/>
+                        <h:outputText value="Date prévue"/>
+                        <h:outputText value="#{fraisController.selected.idPeriodet.toString()}" title="#{bundle.ViewFraisTitle_idPeriodet}"/>
+                        <h:outputText value="Type"/>
+                        <h:outputText value="#{fraisController.selected.idType.toString()}" title="#{bundle.ViewFraisTitle_idType}"/>
+                        <h:outputText value="#{bundle.ViewFraisLabel_matricule}"/>
+                        <h:outputText value="#{fraisController.selected.matricule}" title="#{bundle.ViewFraisTitle_matricule}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="FraisViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

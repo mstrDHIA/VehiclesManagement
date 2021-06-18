@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+ <head>
+         <h:outputStylesheet library="css" name="jsfcrud.css"/>
+      <h:outputStylesheet library="css" name="bootstrap.css"/>
+         <h:outputScript library="js" name="bootstrap.min.js"/>
+    </head>
+  <ui:composition template="/user/template.xhtml" >
+
+        
+       
+
+        <ui:define name="title">
+            <h:outputText value="Frais Actifes"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+           
+            
+            <h:form id="FraisactifesListForm">
+                <p:panel class="test" id="lst"  header="Frais Actifes">
+                    <p:dataTable id="datalist" value="#{fraisactifesController.items}" var="item"
+                                 selectionMode="single" selection="#{fraisactifesController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idActif}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+                        
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                        
+
+                        <p:column filterBy="#{item.idActif}" sortBy="#{item.idActif}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListFraisactifesTitle_idActif}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idActif}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.validation}" sortBy="#{item.validation}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListFraisactifesTitle_validation}"/>
+                            </f:facet>
+                            <p:selectBooleanCheckbox value="#{item.validation}" disabled="true"/>
+                        </p:column>
+                        <p:column filterBy="#{item.dateValidation}" sortBy="#{item.dateValidation}">
+                            <f:facet name="header">
+                                <h:outputText value="Date Validation"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateValidation}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </p:column >
+                        <p:column filterBy="#{item.dateActif}" sortBy="#{item.dateActif}">
+                            <f:facet name="header">
+                                <h:outputText value="Date Actife"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateActif}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column filterBy="#{item.periodeActif}" sortBy="#{item.periodeActif}">
+                            <f:facet name="header">
+                                <h:outputText value="Periode Actife"/>
+                            </f:facet>
+                            <h:outputText value="#{item.periodeActif}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.idFrais.toString()}" sortBy="#{item.idFrais.toString()}">
+                            <f:facet name="header">
+                                <h:outputText value="Frais"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idFrais.toString()}"/>
+                        </p:column>
+                        <p:column filterBy="#{fraisactifesController.writemontant(item.idActif)}" sortBy="#{fraisactifesController.writemontant(item.idActif)}">
+                            <f:facet name="header">
+                                <h:outputText value="Montant"/>
+                            </f:facet>
+                            <h:outputText value="#{fraisactifesController.writemontant(item.idActif)}"/>
+                        </p:column>
+                        <p:column filterBy="#{fraisactifesController.writemat(item.idActif)}" sortBy="#{fraisactifesController.writemat(item.idActif)}">
+                            <f:facet name="header">
+                                <h:outputText value="Matricule"/>
+                            </f:facet>
+                            <h:outputText value="#{fraisactifesController.writemat(item.idActif)}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            
+                           
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{fraisactifesController.prepareCreate}" update=":FraisactifesCreateForm" oncomplete="PF('FraisactifesCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":FraisactifesViewForm" oncomplete="PF('FraisactifesViewDialog').show()" disabled="#{empty fraisactifesController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":FraisactifesEditForm" oncomplete="PF('FraisactifesEditDialog').show()" disabled="#{empty fraisactifesController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{fraisactifesController.destroy}" update=":growl,datalist" disabled="#{empty fraisactifesController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

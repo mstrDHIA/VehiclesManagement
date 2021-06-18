@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TypeVoitureViewDlg" widgetVar="TypeVoitureViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTypeVoitureTitle}">
+            <h:form id="TypeVoitureViewForm">
+                <p:commandButton value="Print" type="button" icon="pi pi-print" style="display:block;margin-bottom: 20px">
+    <p:printer target="printable" />
+</p:commandButton>
+                <h:panelGroup id="display">
+                    <p:panelGrid id="printable" columns="2" rendered="#{typeVoitureController.selected != null}">
+                        <h:outputText value="#{bundle.ViewTypeVoitureLabel_idTypev}"/>
+                        <h:outputText value="#{typeVoitureController.selected.idTypev}" title="#{bundle.ViewTypeVoitureTitle_idTypev}"/>
+                        <h:outputText value="#{bundle.ViewTypeVoitureLabel_type}"/>
+                        <h:outputText value="#{typeVoitureController.selected.type}" title="#{bundle.ViewTypeVoitureTitle_type}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="TypeVoitureViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

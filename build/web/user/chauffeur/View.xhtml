@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ChauffeurViewDlg" widgetVar="ChauffeurViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewChauffeurTitle}">
+            <h:form id="ChauffeurViewForm">
+                <p:commandButton value="Print" type="button" icon="pi pi-print" style="display:block;margin-bottom: 20px">
+    <p:printer target="printable" />
+</p:commandButton>
+                <h:panelGroup id="display">
+                    <p:panelGrid id="printable" columns="2" rendered="#{chauffeurController.selected != null}">
+                        <h:outputText value="#{bundle.ViewChauffeurLabel_cin}"/>
+                        <h:outputText value="#{chauffeurController.selected.cin}" title="#{bundle.ViewChauffeurTitle_cin}"/>
+                        <h:outputText value="#{bundle.ViewChauffeurLabel_nom}"/>
+                        <h:outputText value="#{chauffeurController.selected.nom}" title="#{bundle.ViewChauffeurTitle_nom}"/>
+                        <h:outputText value="#{bundle.ViewChauffeurLabel_prenom}"/>
+                        <h:outputText value="#{chauffeurController.selected.prenom}" title="#{bundle.ViewChauffeurTitle_prenom}"/>
+                        <h:outputText value="#{bundle.ViewChauffeurLabel_age}"/>
+                        <h:outputText value="#{chauffeurController.selected.age}" title="#{bundle.ViewChauffeurTitle_age}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ChauffeurViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

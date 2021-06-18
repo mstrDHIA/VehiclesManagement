@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PeriodeTempsTabEditDlg" widgetVar="PeriodeTempsTabEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPeriodeTempsTabTitle}">
+            <h:form id="PeriodeTempsTabEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{periodeTempsTabController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPeriodeTempsTabLabel_idPeriodet}" for="idPeriodet" />
+                        <p:inputText id="idPeriodet" value="#{periodeTempsTabController.selected.idPeriodet}" title="#{bundle.EditPeriodeTempsTabTitle_idPeriodet}" required="true" requiredMessage="#{bundle.EditPeriodeTempsTabRequiredMessage_idPeriodet}"/>
+                        <p:outputLabel value="#{bundle.EditPeriodeTempsTabLabel_date}" for="date" />
+                        <p:calendar id="date" pattern="dd/MM/yyyy" value="#{periodeTempsTabController.selected.date}" title="#{bundle.EditPeriodeTempsTabTitle_date}" required="true" requiredMessage="#{bundle.EditPeriodeTempsTabRequiredMessage_date}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditPeriodeTempsTabLabel_tolerance}" for="tolerance" />
+                        <p:inputText id="tolerance" value="#{periodeTempsTabController.selected.tolerance}" title="#{bundle.EditPeriodeTempsTabTitle_tolerance}" required="true" requiredMessage="#{bundle.EditPeriodeTempsTabRequiredMessage_tolerance}"/>
+                        <p:outputLabel value="#{bundle.EditPeriodeTempsTabLabel_alarme}" for="alarme" />
+                        <p:calendar id="alarme" pattern="dd/MM/yyyy" value="#{periodeTempsTabController.selected.alarme}" title="#{bundle.EditPeriodeTempsTabTitle_alarme}" required="true" requiredMessage="#{bundle.EditPeriodeTempsTabRequiredMessage_alarme}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditPeriodeTempsTabLabel_periodicitee}" for="periodicitee" />
+                        <p:inputText id="periodicitee" value="#{periodeTempsTabController.selected.periodicitee}" title="#{bundle.EditPeriodeTempsTabTitle_periodicitee}" required="true" requiredMessage="#{bundle.EditPeriodeTempsTabRequiredMessage_periodicitee}"/>
+                       
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{periodeTempsTabController.update}" value="#{bundle.Save}" update="display,:PeriodeTempsTabListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PeriodeTempsTabEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PeriodeTempsTabEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

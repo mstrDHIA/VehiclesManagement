@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VoituresViewDlg" widgetVar="VoituresViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewVoituresTitle}">
+            <h:form id="VoituresViewForm">
+                <p:commandButton value="Print" type="button" icon="pi pi-print" style="display:block;margin-bottom: 20px">
+    <p:printer target="printable" />
+</p:commandButton>
+                <h:panelGroup  id="display">
+                    <p:panelGrid id="printable" columns="2" rendered="#{voituresController.selected != null}">
+                        <h:outputText value="#{bundle.ViewVoituresLabel_matricule}"/>
+                        <h:outputText value="#{voituresController.selected.matricule}" title="#{bundle.ViewVoituresTitle_matricule}"/>
+                        <h:outputText value="Type Carburant"/>
+                        <h:outputText value="#{voituresController.selected.idCarburant.toString()}" title="#{bundle.ViewVoituresTitle_idCarburant}"/>
+                       
+                        <h:outputText value="#{bundle.ViewVoituresLabel_nom}"/>
+                        <h:outputText value="#{voituresController.selected.nom}" title="#{bundle.ViewVoituresTitle_nom}"/>
+                        <h:outputText value="#{bundle.ViewVoituresLabel_kilometrage}"/>
+                        <h:outputText value="#{voituresController.selected.kilometrage}" title="#{bundle.ViewVoituresTitle_kilometrage}"/>
+                        <h:outputText value="Kilometrage Debut"/>
+                        <h:outputText value="#{voituresController.selected.kilodebut}" title="#{bundle.ViewVoituresTitle_kilodebut}"/>
+                        <h:outputText value="Volume De Réservoir"/>
+                        <h:outputText value="#{voituresController.selected.volres}" title="#{bundle.ViewVoituresTitle_volres}"/>
+                        <h:outputText value="Consommation Minimale"/>
+                        <h:outputText value="#{voituresController.selected.consomin}" title="#{bundle.ViewVoituresTitle_consomin}"/>
+                        <h:outputText value="Consommation Maximale"/>
+                        <h:outputText value="#{voituresController.selected.consomax}" title="#{bundle.ViewVoituresTitle_consomax}"/>
+                        <h:outputText value="Prix Du Plein Depart"/>
+                        <h:outputText value="#{voituresController.selected.prixpleindepart}" title="#{bundle.ViewVoituresTitle_prixpleindepart}"/>
+                        <h:outputText value="Date Debut "/>
+                        <h:outputText value="#{voituresController.selected.datedebut}" title="#{bundle.ViewVoituresTitle_datedebut}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="Date d'acquisuition"/>
+                        <h:outputText value="#{voituresController.selected.dateachat}" title="#{bundle.ViewVoituresTitle_dateachat}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="Prix d'acquisition"/>
+                        <h:outputText value="#{voituresController.selected.prix}" title="#{bundle.ViewVoituresTitle_prix}"/>
+                        <h:outputText value="Volumes Initiale de Reservoir"/>
+                        <h:outputText value="#{voituresController.selected.puissance}" title="#{bundle.ViewVoituresTitle_puissance}"/>
+                        <h:outputText value="Nombre De Places"/>
+                        <h:outputText value="#{voituresController.selected.nbPlace}" title="#{bundle.ViewVoituresTitle_nbPlace}"/>
+                        <h:outputText value="#{bundle.ViewVoituresLabel_marque}"/>
+                        <h:outputText value="#{voituresController.selected.marque}" title="#{bundle.ViewVoituresTitle_marque}"/>
+                      
+                        <h:outputText value="Site"/>
+                        <h:outputText value="#{voituresController.selected.idSite.toString()}" title="#{bundle.ViewVoituresTitle_idSite}"/>
+                         <h:outputText value="Chauffeur"/>
+                        <h:outputText value="#{voituresController.selected.cin.toString()}" title="#{bundle.ViewVoituresTitle_idSite}"/>
+                        <h:outputText value="Type Voiture"/>
+                        <h:outputText value="#{voituresController.selected.idTypev.toString()}" title="#{bundle.ViewVoituresTitle_idTypev}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="VoituresViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

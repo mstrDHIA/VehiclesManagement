@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TypeFraisEditDlg" widgetVar="TypeFraisEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTypeFraisTitle}">
+            <h:form id="TypeFraisEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{typeFraisController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditTypeFraisLabel_idType}" for="idType" />
+                        <p:inputText id="idType" value="#{typeFraisController.selected.idType}" title="#{bundle.EditTypeFraisTitle_idType}" required="true" requiredMessage="#{bundle.EditTypeFraisRequiredMessage_idType}"/>
+                        <p:outputLabel value="#{bundle.EditTypeFraisLabel_type}" for="type" />
+                        <p:inputText id="type" value="#{typeFraisController.selected.type}" title="#{bundle.EditTypeFraisTitle_type}" required="true" requiredMessage="#{bundle.EditTypeFraisRequiredMessage_type}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{typeFraisController.update}" value="#{bundle.Save}" update="display,:TypeFraisListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TypeFraisEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TypeFraisEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

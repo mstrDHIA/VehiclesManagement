@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DepencesViewDlg" widgetVar="DepencesViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewDepencesTitle}">
+            <h:form id="DepencesViewForm">
+                <p:commandButton value="Print" type="button" icon="pi pi-print" style="display:block;margin-bottom: 20px">
+    <p:printer target="printable" />
+</p:commandButton>
+                <h:panelGroup id="display">
+                    <p:panelGrid id="printable" columns="2" rendered="#{depencesController.selected != null}">
+                        <h:outputText value="#{bundle.ViewDepencesLabel_idDepences}"/>
+                        <h:outputText value="#{depencesController.selected.idDepences}" title="#{bundle.ViewDepencesTitle_idDepences}"/>
+                        <h:outputText value="#{bundle.ViewDepencesLabel_matricule}"/>
+                        <h:outputText value="#{depencesController.selected.matricule}" title="#{bundle.ViewDepencesTitle_matricule}"/>
+                        <h:outputText value="#{bundle.ViewDepencesLabel_total}"/>
+                        <h:outputText value="#{depencesController.selected.total}" title="#{bundle.ViewDepencesTitle_total}"/>
+                        <h:outputText value="Fournisseur"/>
+                        <h:outputText value="#{depencesController.selected.idFournisseur.toString()}" title="#{bundle.ViewDepencesTitle_idFournisseur}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="DepencesViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

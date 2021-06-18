@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VoituresEditDlg" widgetVar="VoituresEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditVoituresTitle}">
+            <h:form id="VoituresEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="4" rendered="#{voituresController.selected != null}">
+                       
+                        <p:outputLabel value="#{bundle.EditVoituresLabel_matricule}" for="matricule" />
+                        <p:inputText id="matricule" value="#{voituresController.selected.matricule}" title="#{bundle.EditVoituresTitle_matricule}" required="true" requiredMessage="#{bundle.EditVoituresRequiredMessage_matricule}"/>
+                         <p:outputLabel value="Type Carburant" for="idCarburant" />
+                        <p:selectOneMenu id="idCarburant" value="#{voituresController.selected.idCarburant}" required="true" requiredMessage="#{bundle.EditVoituresRequiredMessage_idCarburant}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{typeCarburantController.itemsAvailableSelectOne}"
+                                           var="idCarburantItem"
+                                           itemValue="#{idCarburantItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditVoituresLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{voituresController.selected.nom}" title="#{bundle.EditVoituresTitle_nom}" required="true" requiredMessage="#{bundle.EditVoituresRequiredMessage_nom}"/>
+                        <p:outputLabel value="#{bundle.EditVoituresLabel_kilometrage}" for="kilometrage" />
+                        <p:inputText id="kilometrage" value="#{voituresController.selected.kilometrage}" title="#{bundle.EditVoituresTitle_kilometrage}" required="true" requiredMessage="#{bundle.EditVoituresRequiredMessage_kilometrage}"/>
+                        <p:outputLabel value="Kilometrage Debut" for="kilodebut" />
+                        <p:inputText id="kilodebut" value="#{voituresController.selected.kilodebut}" title="#{bundle.EditVoituresTitle_kilodebut}" required="true" requiredMessage="#{bundle.EditVoituresRequiredMessage_kilodebut}"/>
+                        <p:outputLabel value="Volume De Reservoire" for="volres" />
+                        <p:inputText id="volres" value="#{voituresController.selected.volres}" title="#{bundle.EditVoituresTitle_volres}" required="true" requiredMessage="#{bundle.EditVoituresRequiredMessage_volres}"/>
+                        <p:outputLabel value="Consommation Minimale" for="consomin" />
+                        <p:inputText id="consomin" value="#{voituresController.selected.consomin}" title="#{bundle.EditVoituresTitle_consomin}" required="true" requiredMessage="#{bundle.EditVoituresRequiredMessage_consomin}"/>
+                        <p:outputLabel value="Consommation Maximale" for="consomax" />
+                        <p:inputText id="consomax" value="#{voituresController.selected.consomax}" title="#{bundle.EditVoituresTitle_consomax}" required="true" requiredMessage="#{bundle.EditVoituresRequiredMessage_consomax}"/>
+                        <p:outputLabel value="Prix Du Plein Depart" for="prixpleindepart" />
+                        <p:inputText id="prixpleindepart" value="#{voituresController.selected.prixpleindepart}" title="#{bundle.EditVoituresTitle_prixpleindepart}" required="true" requiredMessage="#{bundle.EditVoituresRequiredMessage_prixpleindepart}"/>
+                        <p:outputLabel value="Date Debut" for="datedebut" />
+                        <p:calendar id="datedebut" pattern="dd/MM/yyyy" value="#{voituresController.selected.datedebut}" title="#{bundle.EditVoituresTitle_datedebut}" required="true" requiredMessage="#{bundle.EditVoituresRequiredMessage_datedebut}" showOn="button"/>
+                        <p:outputLabel value="Date d'acquisuition" for="dateachat" />
+                        <p:calendar id="dateachat" pattern="dd/MM/yyyy" value="#{voituresController.selected.dateachat}" title="#{bundle.EditVoituresTitle_dateachat}"  showOn="button"/>
+                        <p:outputLabel value="Prix d'acquisition" for="prix" />
+                        <p:inputText id="prix" value="#{voituresController.selected.prix}" title="#{bundle.EditVoituresTitle_prix}" required="true" requiredMessage="#{bundle.EditVoituresRequiredMessage_prix}"/>
+                        <p:outputLabel value="Volumes Initiale de Reservoir" for="puissance" />
+                        <p:inputText id="puissance" value="#{voituresController.selected.puissance}" title="#{bundle.EditVoituresTitle_puissance}" required="true" requiredMessage="#{bundle.EditVoituresRequiredMessage_puissance}"/>
+                        <p:outputLabel value="Nombre De Places" for="nbPlace" />
+                        <p:inputText id="nbPlace" value="#{voituresController.selected.nbPlace}" title="#{bundle.EditVoituresTitle_nbPlace}" required="true" requiredMessage="#{bundle.EditVoituresRequiredMessage_nbPlace}"/>
+                        <p:outputLabel value="#{bundle.EditVoituresLabel_marque}" for="marque" />
+                        <p:inputText id="marque" value="#{voituresController.selected.marque}" title="#{bundle.EditVoituresTitle_marque}" required="true" requiredMessage="#{bundle.EditVoituresRequiredMessage_marque}"/>
+                        <p:outputLabel value="Chauffeur" for="cin" />
+                        <p:selectOneMenu id="cin" value="#{voituresController.selected.cin}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{chauffeurController.itemsAvailableSelectOne}"
+                                           var="cinItem"
+                                           itemValue="#{cinItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Site" for="idSite" />
+                        <p:selectOneMenu id="idSite" value="#{voituresController.selected.idSite}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{siteController.itemsAvailableSelectOne}"
+                                           var="idSiteItem"
+                                           itemValue="#{idSiteItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Type Voiture" for="idTypev" />
+                        <p:selectOneMenu id="idTypev" value="#{voituresController.selected.idTypev}" required="true" requiredMessage="#{bundle.EditVoituresRequiredMessage_idTypev}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{typeVoitureController.itemsAvailableSelectOne}"
+                                           var="idTypevItem"
+                                           itemValue="#{idTypevItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{voituresController.update}" value="#{bundle.Save}" update="display,:VoituresListForm:datalist,:growl" oncomplete="handleSubmit(args, 'VoituresEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="VoituresEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
